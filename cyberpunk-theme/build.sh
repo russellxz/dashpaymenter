@@ -72,11 +72,18 @@ mkdir -p build-tmp/assets-only
 rm -f cyberpunk-tema.zip cyberpunk-extension.zip cyberpunk-todo-en-uno.zip \
       cyberpunk-extension-con-tema.zip cyberpunk-assets.zip
 
-(cd build-tmp      && zip -rq9 ../cyberpunk-tema.zip                cyberpunk-tema -x "*.DS_Store" "*__MACOSX*")
-(cd build-tmp/ext  && zip -rq9 ../../cyberpunk-extension.zip        CyberpunkTheme -x "*.DS_Store" "*__MACOSX*")
-(cd build-tmp/lite && zip -rq9 ../../cyberpunk-extension-con-tema.zip CyberpunkTheme -x "*.DS_Store" "*__MACOSX*")
-(cd build-tmp/full && zip -rq9 ../../cyberpunk-todo-en-uno.zip      CyberpunkTheme -x "*.DS_Store" "*__MACOSX*")
-(cd build-tmp/assets-only && zip -rq9 ../../cyberpunk-assets.zip    . -x "*.DS_Store" "*__MACOSX*")
+# Los paquetes que se suben por el panel van con -D -X:
+#   -D  no guarda entradas de carpeta (ZipArchive las crea al extraer)
+#   -X  no guarda los campos extra de Unix (uid/gid y fechas extra)
+# Son 7 KB menos sin tocar el contenido, y cuanto menos pese el ZIP menos
+# probabilidades hay de chocar con el límite de subida del servidor.
+ZIPOPTS="-rq9 -D -X"
+
+(cd build-tmp      && zip -rq9  ../cyberpunk-tema.zip                  cyberpunk-tema -x "*.DS_Store" "*__MACOSX*")
+(cd build-tmp/ext  && zip $ZIPOPTS ../../cyberpunk-extension.zip        CyberpunkTheme -x "*.DS_Store" "*__MACOSX*")
+(cd build-tmp/lite && zip $ZIPOPTS ../../cyberpunk-extension-con-tema.zip CyberpunkTheme -x "*.DS_Store" "*__MACOSX*")
+(cd build-tmp/full && zip $ZIPOPTS ../../cyberpunk-todo-en-uno.zip      CyberpunkTheme -x "*.DS_Store" "*__MACOSX*")
+(cd build-tmp/assets-only && zip -rq9 ../../cyberpunk-assets.zip        . -x "*.DS_Store" "*__MACOSX*")
 
 rm -rf build-tmp
 

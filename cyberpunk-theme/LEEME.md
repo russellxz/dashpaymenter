@@ -4,15 +4,15 @@ Paquetes disponibles (elige según lo que admita tu servidor):
 
 | Paquete | Qué instala | Dónde | Tamaño |
 |---|---|---|---|
-| `cyberpunk-extension.zip` | La extensión sola | `extensions/Others/CyberpunkTheme` | 88 KB |
-| `cyberpunk-extension-con-tema.zip` | Extensión + tema (sin estilos) | `extensions/…` + `themes/cyberpunk` | 241 KB |
-| `cyberpunk-assets.zip` | Sólo los estilos compilados | `public/cyberpunk` | 223 KB |
+| `cyberpunk-extension.zip` | La extensión sola | `extensions/Others/CyberpunkTheme` | 81 KB |
+| `cyberpunk-extension-con-tema.zip` | Extensión + tema (sin estilos) | `extensions/…` + `themes/cyberpunk` | 223 KB |
+| `cyberpunk-assets.zip` | Sólo los estilos compilados | `public/cyberpunk` | 222 KB |
 | `cyberpunk-tema.zip` | El tema completo + estilos | `themes/cyberpunk` + `public/cyberpunk` | 387 KB |
-| `cyberpunk-todo-en-uno.zip` | Todo de una vez | las tres carpetas | 475 KB |
+| `cyberpunk-todo-en-uno.zip` | Todo de una vez | las tres carpetas | 445 KB |
 
 ## Si el subidor del panel rechaza los archivos grandes
 
-Si `cyberpunk-extension.zip` (88 KB) sube pero `cyberpunk-todo-en-uno.zip` (475 KB)
+Si `cyberpunk-extension.zip` (81 KB) sube pero `cyberpunk-todo-en-uno.zip` (445 KB)
 no, tu servidor tiene un límite de subida bajo. Compruébalo:
 
 ```bash
@@ -26,7 +26,7 @@ PHP-FPM y Nginx.
 
 Mientras tanto, la combinación que funciona con límites bajos es:
 
-1. Sube por el panel `cyberpunk-extension-con-tema.zip` (241 KB) → instala la
+1. Sube por el panel `cyberpunk-extension-con-tema.zip` (223 KB) → instala la
    extensión **y** el tema.
 2. Copia por FTP el contenido de `cyberpunk-assets.zip` a `public/cyberpunk/`.
 
@@ -368,9 +368,20 @@ Ese mensaje **no viene del ZIP**: es la validación `uploaded` de Laravel, y sal
 cuando la petición que lleva el archivo nunca llegó entera a PHP. El ZIP está
 comprobado (`unzip -t`) y se sube bien en una instalación limpia de Paymenter.
 
-Para saber qué pasa de verdad, mira el **código de estado** de la petición que
-falla. Abre las herramientas de desarrollo del navegador (F12) → pestaña **Red**,
-vuelve a elegir el archivo y busca la petición `upload-file`:
+**Primero, la prueba de los 367 bytes.** En esta carpeta hay un
+`prueba-subida.zip` diminuto. Súbelo por **Upload Extension**:
+
+- Si sale **«Failed to upload extension — No valid extension files found in the
+  provided path»**, ¡perfecto! Eso significa que la subida funciona (el archivo
+  llegó entero y Paymenter lo abrió; sólo que dentro no hay ninguna extensión,
+  que es justo lo que se quería comprobar). Entonces el problema es el
+  **tamaño**: tu servidor corta los archivos a partir de cierto peso.
+- Si sale otra vez **«Error durante la subida»** con un ZIP de 367 bytes, tu
+  servidor **no sube nada**, y el paquete no tiene nada que ver.
+
+Después, para saber quién lo corta, mira el **código de estado** de la petición
+que falla. Abre las herramientas de desarrollo del navegador (F12) → pestaña
+**Red**, vuelve a elegir el archivo y busca la petición `upload-file`:
 
 | Código | Qué significa | Qué tocar |
 |---|---|---|
@@ -394,7 +405,8 @@ tail -50 storage/logs/laravel.log
 ```
 
 Por eso `cyberpunk-extension.zip` se genera **sólo con código** (sin manuales):
-son 88 KB en vez de 100 KB, para que quepa también en los servidores con el
+son 81 KB en vez de 100 KB (además se generan sin entradas de carpeta ni
+campos extra de Unix), para que quepa también en los servidores con el
 límite muy bajo.
 
 Si aun así no sube, **no pierdas tiempo con el subidor**: por terminal siempre
