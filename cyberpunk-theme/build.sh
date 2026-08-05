@@ -41,14 +41,20 @@ cp instalar.sh LEEME.md build-tmp/cyberpunk-tema/
 chmod +x build-tmp/cyberpunk-tema/instalar.sh
 
 # ------------------------------------------------------- extensión
+#
+# Este es el ZIP que se sube por el panel de Paymenter, así que va lo más
+# ligero posible: sólo código. Los manuales (LEEME.md, README.md) viajan en
+# cyberpunk-tema.zip y están en el repositorio; dentro del servidor no hacen
+# nada y engordaban el paquete casi 9 KB, justo lo que sobra en los servidores
+# con el límite de subida bajo.
 cp -r CyberpunkTheme build-tmp/ext/CyberpunkTheme
-cp LEEME.md build-tmp/ext/CyberpunkTheme/
+rm -f build-tmp/ext/CyberpunkTheme/LEEME.md build-tmp/ext/CyberpunkTheme/README.md
 chmod +x build-tmp/ext/CyberpunkTheme/install.sh
 
 # --------------------- extensión + tema, SIN assets (ligera, para subidores estrictos)
 mkdir -p build-tmp/lite
 cp -r CyberpunkTheme build-tmp/lite/CyberpunkTheme
-cp LEEME.md build-tmp/lite/CyberpunkTheme/
+rm -f build-tmp/lite/CyberpunkTheme/LEEME.md build-tmp/lite/CyberpunkTheme/README.md
 chmod +x build-tmp/lite/CyberpunkTheme/install.sh
 cp -r cyberpunk build-tmp/lite/CyberpunkTheme/theme
 

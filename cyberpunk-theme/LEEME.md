@@ -4,15 +4,15 @@ Paquetes disponibles (elige según lo que admita tu servidor):
 
 | Paquete | Qué instala | Dónde | Tamaño |
 |---|---|---|---|
-| `cyberpunk-extension.zip` | La extensión sola | `extensions/Others/CyberpunkTheme` | 99 KB |
-| `cyberpunk-extension-con-tema.zip` | Extensión + tema (sin estilos) | `extensions/…` + `themes/cyberpunk` | 251 KB |
+| `cyberpunk-extension.zip` | La extensión sola | `extensions/Others/CyberpunkTheme` | 88 KB |
+| `cyberpunk-extension-con-tema.zip` | Extensión + tema (sin estilos) | `extensions/…` + `themes/cyberpunk` | 241 KB |
 | `cyberpunk-assets.zip` | Sólo los estilos compilados | `public/cyberpunk` | 223 KB |
 | `cyberpunk-tema.zip` | El tema completo + estilos | `themes/cyberpunk` + `public/cyberpunk` | 387 KB |
 | `cyberpunk-todo-en-uno.zip` | Todo de una vez | las tres carpetas | 475 KB |
 
 ## Si el subidor del panel rechaza los archivos grandes
 
-Si `cyberpunk-extension.zip` (99 KB) sube pero `cyberpunk-todo-en-uno.zip` (475 KB)
+Si `cyberpunk-extension.zip` (88 KB) sube pero `cyberpunk-todo-en-uno.zip` (475 KB)
 no, tu servidor tiene un límite de subida bajo. Compruébalo:
 
 ```bash
@@ -26,7 +26,7 @@ PHP-FPM y Nginx.
 
 Mientras tanto, la combinación que funciona con límites bajos es:
 
-1. Sube por el panel `cyberpunk-extension-con-tema.zip` (251 KB) → instala la
+1. Sube por el panel `cyberpunk-extension-con-tema.zip` (241 KB) → instala la
    extensión **y** el tema.
 2. Copia por FTP el contenido de `cyberpunk-assets.zip` a `public/cyberpunk/`.
 
@@ -361,18 +361,49 @@ ls -la themes/
 chown -R www-data:www-data themes/cyberpunk
 ```
 
-**"Error durante la subida" al subir la extensión por el panel**
-Es un problema de PHP en tu servidor, no del ZIP: falla la validación `uploaded`
-de Laravel porque PHP no puede escribir su archivo temporal.
+**"Error durante la subida" / "El mountedActions.0.data.file.… no se ha podido
+subir" al subir la extensión por el panel**
+
+Ese mensaje **no viene del ZIP**: es la validación `uploaded` de Laravel, y salta
+cuando la petición que lleva el archivo nunca llegó entera a PHP. El ZIP está
+comprobado (`unzip -t`) y se sube bien en una instalación limpia de Paymenter.
+
+Para saber qué pasa de verdad, mira el **código de estado** de la petición que
+falla. Abre las herramientas de desarrollo del navegador (F12) → pestaña **Red**,
+vuelve a elegir el archivo y busca la petición `upload-file`:
+
+| Código | Qué significa | Qué tocar |
+|---|---|---|
+| **413** | El servidor web corta el cuerpo de la petición | Nginx: `client_max_body_size 20M;` · Apache: `LimitRequestBody` · LiteSpeed: *Max Request Body Size* |
+| **403** | Un cortafuegos (ModSecurity, WAF del panel) bloquea la subida | Desactiva la regla para `/admin` o sube por terminal |
+| **419** | La sesión caducó | Recarga la página e inténtalo otra vez |
+| **422** | PHP recibió el archivo a medias o vacío | `upload_max_filesize` / `post_max_size` |
+| **500** | Error de PHP | `tail -50 storage/logs/laravel.log` |
+
+Y comprueba los límites y los permisos de escritura:
+
 ```bash
+# ojo: los valores de la CLI pueden no ser los del sitio web
 php -i | grep -E "upload_tmp_dir|open_basedir|file_uploads|upload_max_filesize|post_max_size"
+
 mkdir -p storage/app/livewire-tmp storage/app/extensions/uploaded
 chown -R www-data:www-data storage bootstrap/cache
 chmod -R 775 storage bootstrap/cache
+df -h /tmp                      # sin espacio libre, PHP no puede guardar la subida
 tail -50 storage/logs/laravel.log
 ```
-En Nginx añade dentro del bloque `server`: `client_max_body_size 20M;`
-De todas formas, con `install.sh` no necesitas el subidor.
+
+Por eso `cyberpunk-extension.zip` se genera **sólo con código** (sin manuales):
+son 88 KB en vez de 100 KB, para que quepa también en los servidores con el
+límite muy bajo.
+
+Si aun así no sube, **no pierdas tiempo con el subidor**: por terminal siempre
+funciona y el resultado es exactamente el mismo.
+
+```bash
+cd /tmp && unzip -o cyberpunk-extension.zip && cd CyberpunkTheme
+bash install.sh /var/www/paymenter
+```
 
 **En la comunidad no me deja subir varias fotos, o los vídeos fallan**
 

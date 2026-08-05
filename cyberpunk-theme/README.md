@@ -4,14 +4,26 @@ Dos paquetes separados. **Ninguno modifica el núcleo de Paymenter ni el tema `d
 
 | Archivo | Qué es | Se instala en | Tamaño |
 |---|---|---|---|
-| `cyberpunk-extension.zip` | **La extensión sola** | `extensions/Others/CyberpunkTheme` | 99 KB |
-| `cyberpunk-extension-con-tema.zip` | **Extensión + tema**, sin los estilos compilados | `extensions/…` y `themes/cyberpunk` | 251 KB |
+| `cyberpunk-extension.zip` | **La extensión sola** | `extensions/Others/CyberpunkTheme` | 88 KB |
+| `cyberpunk-extension-con-tema.zip` | **Extensión + tema**, sin los estilos compilados | `extensions/…` y `themes/cyberpunk` | 241 KB |
 | `cyberpunk-assets.zip` | **Sólo los estilos compilados** (CSS y JS) | `public/cyberpunk` | 223 KB |
 | `cyberpunk-tema.zip` | **El tema completo** + estilos + `instalar.sh` | `themes/cyberpunk` y `public/cyberpunk` | 387 KB |
 | `cyberpunk-todo-en-uno.zip` | **Todo**: extensión + tema + estilos | las tres carpetas de una vez | 475 KB |
 
 El tema funciona por sí solo; la extensión añade el panel de administración y las
 funciones sociales encima.
+
+## Novedades de la 1.5.1
+
+- **El ZIP de la extensión adelgaza de 100 KB a 88 KB.** Ya no lleva dentro los
+  manuales (`LEEME.md` y `README.md`), que no pintan nada en el servidor y
+  ocupaban casi 9 KB comprimidos. En servidores con el límite de subida muy
+  bajo, esa diferencia era justo la que hacía fallar
+  **Upload Extension** con «Error durante la subida».
+- Nueva tabla de diagnóstico en el `LEEME.md`: qué significa cada código
+  (413, 403, 419, 422, 500) en la petición `upload-file` y qué tocar en cada
+  caso. Comprobado que el paquete sube e instala bien desde el panel en una
+  instalación limpia de Paymenter.
 
 ## Novedades de la 1.5.0
 
@@ -135,7 +147,7 @@ funciones sociales encima.
 - **Todo desde el panel:** `cyberpunk-todo-en-uno.zip` (necesita que el subidor
   admita 475 KB y que el usuario web pueda escribir en `themes/` y `public/`).
 - **Si el subidor rechaza archivos grandes:** sube `cyberpunk-extension-con-tema.zip`
-  (251 KB) por el panel y copia `cyberpunk-assets.zip` a `public/cyberpunk/` por FTP.
+  (241 KB) por el panel y copia `cyberpunk-assets.zip` a `public/cyberpunk/` por FTP.
 
 Los ZIP se generan con `bash build.sh` a partir de las fuentes de esta carpeta.
 
