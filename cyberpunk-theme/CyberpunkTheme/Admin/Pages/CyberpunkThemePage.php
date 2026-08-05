@@ -29,6 +29,7 @@ use Spatie\Color\Factory as ColorFactory;
 use Paymenter\Extensions\Others\CyberpunkTheme\Support\Config;
 use Paymenter\Extensions\Others\CyberpunkTheme\Support\Database;
 use Paymenter\Extensions\Others\CyberpunkTheme\Support\Defaults;
+use Paymenter\Extensions\Others\CyberpunkTheme\Support\Designs;
 use Paymenter\Extensions\Others\CyberpunkTheme\Support\Icons;
 use Paymenter\Extensions\Others\CyberpunkTheme\Support\Installer;
 use Paymenter\Extensions\Others\CyberpunkTheme\Support\Palettes;
@@ -159,6 +160,32 @@ class CyberpunkThemePage extends Page implements HasActions, HasForms
                             }),
                     ]),
 
+                Section::make('Barra de navegación')
+                    ->description('Dónde van los enlaces y cómo se abre el menú. En el panel lateral salen también las opciones de la cuenta y, para quien tenga permiso, el acceso al panel de administración.')
+                    ->columns(3)
+                    ->schema([
+                        Select::make('nav_align')
+                            ->label('Posición de los enlaces')
+                            ->options([
+                                'left' => 'Junto al logo (izquierda)',
+                                'center' => 'En el centro',
+                                'right' => 'A la derecha',
+                            ]),
+                        Select::make('nav_style')
+                            ->label('Estilo del menú')
+                            ->options([
+                                'bar' => 'Barra con los enlaces a la vista',
+                                'drawer' => 'Botón que abre un panel lateral',
+                            ])
+                            ->helperText('Con "panel lateral" el botón de las tres rayas se ve también en el ordenador.'),
+                        Select::make('nav_drawer_side')
+                            ->label('El panel se abre por')
+                            ->options([
+                                'right' => 'La derecha',
+                                'left' => 'La izquierda',
+                            ]),
+                    ]),
+
                 Section::make('Textos')
                     ->columns(2)
                     ->schema([
@@ -185,6 +212,56 @@ class CyberpunkThemePage extends Page implements HasActions, HasForms
         return Tab::make('Apariencia')
             ->icon('ri-palette-line')
             ->schema([
+                Section::make('Diseño')
+                    ->description('Un clic cambia la cara entera de la web: colores, tipografía, forma de las tarjetas y efectos. Después puedes retocar lo que quieras en las secciones de abajo.')
+                    ->schema([
+                        Actions::make(
+                            collect(Designs::all())->map(
+                                fn (array $design, string $key) => Action::make('design_' . $key)
+                                    ->label($design['label'])
+                                    ->icon('ri-layout-4-line')
+                                    ->color(fn () => Config::theme('design', 'cyberpunk') === $key ? 'primary' : 'gray')
+                                    ->requiresConfirmation()
+                                    ->modalHeading('Aplicar el diseño ' . $design['label'])
+                                    ->modalDescription($design['description'] . ' Se cambiarán los colores, la tipografía, los efectos y la forma de las tarjetas. Tu contenido (banner, marketing, páginas, reseñas) no se toca.')
+                                    ->modalSubmitActionLabel('Aplicar diseño')
+                                    ->action(fn () => $this->applyDesign($key))
+                            )->values()->all()
+                        ),
+                        \Filament\Forms\Components\Placeholder::make('diseno_actual')
+                            ->label('Diseño activo')
+                            ->content(fn (): string => Designs::all()[Config::theme('design', 'cyberpunk')]['label'] ?? 'Personalizado'),
+                    ]),
+
+                Section::make('Ajustes finos del diseño')
+                    ->columns(3)
+                    ->collapsed()
+                    ->schema([
+                        Select::make('card_style')
+                            ->label('Estilo de las tarjetas')
+                            ->options([
+                                'clip' => 'Esquinas cortadas (cyberpunk)',
+                                'soft' => 'Redondeadas con sombra',
+                                'flat' => 'Planas con borde fino',
+                            ]),
+                        Select::make('corner_style')
+                            ->label('Esquinas')
+                            ->options([
+                                'sharp' => 'Marcadas',
+                                'round' => 'Redondeadas',
+                            ]),
+                        Select::make('font_family')
+                            ->label('Tipografía')
+                            ->options([
+                                'system' => 'Sistema (la más rápida)',
+                                'inter' => 'Inter (limpia y neutra)',
+                                'serif' => 'Serif elegante (empresa)',
+                                'orbitron' => 'Orbitron (futurista)',
+                                'rajdhani' => 'Rajdhani (tecnológica)',
+                                'share-tech' => 'Share Tech Mono (terminal)',
+                            ]),
+                    ]),
+
                 Section::make('Paletas de colores')
                     ->description('Un clic aplica y guarda la paleta al instante. Debajo puedes ajustar cualquier color a mano.')
                     ->schema([
@@ -203,6 +280,17 @@ class CyberpunkThemePage extends Page implements HasActions, HasForms
                     ->description('Se pueden combinar varias a la vez, y cada modo puede llevar las suyas.')
                     ->columns(2)
                     ->schema([
+                        Select::make('anim_intensity')
+                            ->label('Cantidad de animación')
+                            ->options([
+                                'low' => 'Ligera — para equipos lentos',
+                                'normal' => 'Normal',
+                                'high' => 'Intensa',
+                            ])
+                            ->helperText('Cuántas gotas, copos o columnas se dibujan.'),
+                        Toggle::make('anim_mobile')
+                            ->label('Animaciones también en el móvil')
+                            ->helperText('Desactivadas en móvil por defecto: ahí gastan batería y apenas se aprecian.'),
                         CheckboxList::make('anim_dark')
                             ->label('Modo oscuro')
                             ->options($this->animationOptions())
@@ -253,14 +341,6 @@ class CyberpunkThemePage extends Page implements HasActions, HasForms
                         Toggle::make('effect_grid')->label('Rejilla de fondo'),
                         Toggle::make('effect_glitch')->label('Glitch en títulos'),
                         Toggle::make('effect_noise')->label('Ruido de pantalla'),
-                        Select::make('font_family')
-                            ->label('Tipografía')
-                            ->options([
-                                'system' => 'Sistema (más rápida)',
-                                'orbitron' => 'Orbitron (futurista)',
-                                'rajdhani' => 'Rajdhani (tecnológica)',
-                                'share-tech' => 'Share Tech Mono (terminal)',
-                            ]),
                         FileUpload::make('background_image')
                             ->label('Imagen de fondo del sitio')
                             ->image()
@@ -330,6 +410,36 @@ class CyberpunkThemePage extends Page implements HasActions, HasForms
         Notification::make()
             ->title('Paleta aplicada')
             ->body(Palettes::all()[$key]['label'] . ' — ya está activa en la web.')
+            ->success()
+            ->send();
+    }
+
+    /**
+     * Aplica un diseño completo: colores, tipografía, efectos y forma de las
+     * tarjetas. No toca el contenido (banner, marketing, páginas, reseñas).
+     */
+    public function applyDesign(string $key): void
+    {
+        $this->authorizeUpdate();
+
+        $ajustes = Designs::settings($key);
+
+        if (count($ajustes) === 0) {
+            Notification::make()->title('Diseño desconocido')->danger()->send();
+
+            return;
+        }
+
+        $ajustes['design'] = $key;
+
+        Config::save($ajustes);
+
+        // Refrescamos el formulario para que se vean los valores nuevos.
+        $this->data = array_merge($this->data ?? [], $ajustes);
+
+        Notification::make()
+            ->title('Diseño aplicado: ' . Designs::all()[$key]['label'])
+            ->body('Recarga la web para verlo. Puedes seguir ajustando colores y efectos desde aquí.')
             ->success()
             ->send();
     }

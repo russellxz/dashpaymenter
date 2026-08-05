@@ -842,6 +842,89 @@ return [
         |----------------------------------------------------------------
         */
         [
+            'name' => 'nav_align',
+            'label' => 'Posición de los enlaces del menú',
+            'type' => 'select',
+            'options' => [
+                'left' => 'Junto al logo (izquierda)',
+                'center' => 'En el centro',
+                'right' => 'A la derecha',
+            ],
+            'default' => 'left',
+        ],
+        [
+            'name' => 'nav_style',
+            'label' => 'Estilo del menú',
+            'type' => 'select',
+            'options' => [
+                'bar' => 'Barra con los enlaces a la vista',
+                'drawer' => 'Botón que abre un panel lateral',
+            ],
+            'default' => 'bar',
+        ],
+        [
+            'name' => 'nav_drawer_side',
+            'label' => 'Lado por el que se abre el panel',
+            'type' => 'select',
+            'options' => [
+                'right' => 'Derecha',
+                'left' => 'Izquierda',
+            ],
+            'default' => 'right',
+        ],
+        [
+            'name' => 'design',
+            'label' => 'Diseño',
+            'type' => 'select',
+            'options' => [
+                'cyberpunk' => 'Cyberpunk',
+                'corporativo' => 'Corporativo',
+                'minimal' => 'Minimalista',
+                'premium' => 'Premium',
+            ],
+            'default' => 'cyberpunk',
+        ],
+        [
+            'name' => 'card_style',
+            'label' => 'Estilo de las tarjetas',
+            'type' => 'select',
+            'options' => [
+                'clip' => 'Esquinas cortadas (cyberpunk)',
+                'soft' => 'Redondeadas con sombra',
+                'flat' => 'Planas con borde fino',
+            ],
+            'default' => 'clip',
+        ],
+        [
+            'name' => 'corner_style',
+            'label' => 'Esquinas',
+            'type' => 'select',
+            'options' => [
+                'sharp' => 'Marcadas',
+                'round' => 'Redondeadas',
+            ],
+            'default' => 'sharp',
+        ],
+        [
+            'name' => 'anim_intensity',
+            'label' => 'Cantidad de animación',
+            'type' => 'select',
+            'options' => [
+                'low' => 'Ligera (equipos lentos)',
+                'normal' => 'Normal',
+                'high' => 'Intensa',
+            ],
+            'default' => 'normal',
+        ],
+        [
+            'name' => 'anim_mobile',
+            'label' => 'Animaciones también en el móvil',
+            'type' => 'checkbox',
+            'default' => false,
+            'database_type' => 'boolean',
+            'description' => 'Desactivadas en móvil por defecto: gastan batería y ahí no se aprecian.',
+        ],
+        [
             'name' => 'effect_neon',
             'label' => 'Efecto neón',
             'type' => 'checkbox',
@@ -886,6 +969,8 @@ return [
                 'orbitron' => 'Orbitron (futurista)',
                 'rajdhani' => 'Rajdhani (tecnológica)',
                 'share-tech' => 'Share Tech Mono (terminal)',
+                'serif' => 'Serif elegante (empresa)',
+                'inter' => 'Inter (limpia y neutra)',
             ],
             'default' => 'system',
         ],

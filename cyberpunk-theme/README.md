@@ -4,14 +4,44 @@ Dos paquetes separados. **Ninguno modifica el núcleo de Paymenter ni el tema `d
 
 | Archivo | Qué es | Se instala en | Tamaño |
 |---|---|---|---|
-| `cyberpunk-extension.zip` | **La extensión sola** | `extensions/Others/CyberpunkTheme` | 89 KB |
-| `cyberpunk-extension-con-tema.zip` | **Extensión + tema**, sin los estilos compilados | `extensions/…` y `themes/cyberpunk` | 239 KB |
-| `cyberpunk-assets.zip` | **Sólo los estilos compilados** (CSS y JS) | `public/cyberpunk` | 227 KB |
-| `cyberpunk-tema.zip` | **El tema completo** + estilos + `instalar.sh` | `themes/cyberpunk` y `public/cyberpunk` | 385 KB |
-| `cyberpunk-todo-en-uno.zip` | **Todo**: extensión + tema + estilos | las tres carpetas de una vez | 465 KB |
+| `cyberpunk-extension.zip` | **La extensión sola** | `extensions/Others/CyberpunkTheme` | 99 KB |
+| `cyberpunk-extension-con-tema.zip` | **Extensión + tema**, sin los estilos compilados | `extensions/…` y `themes/cyberpunk` | 251 KB |
+| `cyberpunk-assets.zip` | **Sólo los estilos compilados** (CSS y JS) | `public/cyberpunk` | 223 KB |
+| `cyberpunk-tema.zip` | **El tema completo** + estilos + `instalar.sh` | `themes/cyberpunk` y `public/cyberpunk` | 387 KB |
+| `cyberpunk-todo-en-uno.zip` | **Todo**: extensión + tema + estilos | las tres carpetas de una vez | 475 KB |
 
 El tema funciona por sí solo; la extensión añade el panel de administración y las
 funciones sociales encima.
+
+## Novedades de la 1.5.0
+
+- **Cuatro diseños, no uno.** Además de *Cyberpunk* hay tres nuevos:
+  **Corporativo** (azul sobrio, tarjetas redondeadas y sombras suaves),
+  **Minimalista** (líneas finas, mucho aire, sin adornos) y **Premium**
+  (fondo oscuro con dorado y títulos con serifa). Se eligen con un clic en
+  *Apariencia → Diseño* y cambian colores, tipografía, forma de las tarjetas
+  y efectos de golpe; luego se puede retocar todo a mano.
+- **Barra de navegación configurable**: los enlaces se pueden poner a la
+  izquierda, en el centro o a la derecha, y el menú puede ser una barra
+  normal o un **panel lateral** que se abre por el lado que elijas.
+- En ese panel salen ya **las opciones de la cuenta** (panel, servicios,
+  facturas, tickets, cuenta, cerrar sesión) y, para quien tenga permiso, el
+  **acceso al panel de administración**, sin tener que dar un segundo clic
+  en el avatar. El filtro de permisos lo aplica el propio Paymenter.
+- **Reseñas y comentarios, cada uno en su sitio.** El panel tenía los dos
+  mezclados; ahora hay un apartado *Reseñas* (con estrellas, sobre qué es,
+  respuestas y destacar) y otro *Comunidad · Comentarios*.
+- **Arreglado el error al buscar un usuario** en el panel
+  (`Unknown column 'name'`): Paymenter guarda `first_name` y `last_name`, no
+  `name`. Ahora se busca por nombre, apellido **y correo**.
+- **Animaciones rehechas.** La lluvia son gotas de verdad cayendo a
+  distintas velocidades con sus salpicaduras, y la tormenta tiene rayos
+  dibujados con su destello. También nieve, lluvia digital, nubes con
+  volumen y estrellas que titilan.
+- **Más ligero:** el CSS baja de 229 KB a 182 KB, las animaciones se
+  aíslan para que no repinten la página, respetan «reducir movimiento» del
+  sistema, vienen **desactivadas en el móvil** y traen tres niveles de
+  intensidad para equipos lentos.
 
 ## Novedades de la 1.4.1
 
@@ -103,9 +133,9 @@ funciones sociales encima.
 
 - **Por terminal (siempre funciona):** `cyberpunk-tema.zip` + `cyberpunk-extension.zip`.
 - **Todo desde el panel:** `cyberpunk-todo-en-uno.zip` (necesita que el subidor
-  admita 465 KB y que el usuario web pueda escribir en `themes/` y `public/`).
+  admita 475 KB y que el usuario web pueda escribir en `themes/` y `public/`).
 - **Si el subidor rechaza archivos grandes:** sube `cyberpunk-extension-con-tema.zip`
-  (239 KB) por el panel y copia `cyberpunk-assets.zip` a `public/cyberpunk/` por FTP.
+  (251 KB) por el panel y copia `cyberpunk-assets.zip` a `public/cyberpunk/` por FTP.
 
 Los ZIP se generan con `bash build.sh` a partir de las fuentes de esta carpeta.
 

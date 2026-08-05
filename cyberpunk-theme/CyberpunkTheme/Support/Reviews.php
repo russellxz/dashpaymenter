@@ -194,6 +194,14 @@ class Reviews
     {
         $limit = max(1, $limit ?? (int) Config::theme('featured_reviews_limit', 3));
 
+        return Cache::remember('cyberpunk.reviews.featured.' . $limit, now()->addMinutes(5), fn () => self::queryFeatured($limit));
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection<int, Comment>
+     */
+    private static function queryFeatured(int $limit): \Illuminate\Support\Collection
+    {
         try {
             $elegidas = Comment::reviews()
                 ->with('user')
@@ -266,5 +274,10 @@ class Reviews
         Cache::forget('cyberpunk.reviews.stats');
         Cache::forget('cyberpunk.reviews.popular');
         Cache::forget('cyberpunk.reviews.general');
+        Cache::forget('cyberpunk.popular_category');
+
+        for ($i = 1; $i <= 12; $i++) {
+            Cache::forget('cyberpunk.reviews.featured.' . $i);
+        }
     }
 }

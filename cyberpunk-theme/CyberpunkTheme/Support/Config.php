@@ -55,6 +55,7 @@ class Config
         'reviews_page_enabled',
         'avatar_uploads_enabled',
         'featured_reviews_enabled',
+        'anim_mobile',
     ];
 
     /** Claves numéricas */

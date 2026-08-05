@@ -4,15 +4,15 @@ Paquetes disponibles (elige según lo que admita tu servidor):
 
 | Paquete | Qué instala | Dónde | Tamaño |
 |---|---|---|---|
-| `cyberpunk-extension.zip` | La extensión sola | `extensions/Others/CyberpunkTheme` | 89 KB |
-| `cyberpunk-extension-con-tema.zip` | Extensión + tema (sin estilos) | `extensions/…` + `themes/cyberpunk` | 239 KB |
-| `cyberpunk-assets.zip` | Sólo los estilos compilados | `public/cyberpunk` | 227 KB |
-| `cyberpunk-tema.zip` | El tema completo + estilos | `themes/cyberpunk` + `public/cyberpunk` | 385 KB |
-| `cyberpunk-todo-en-uno.zip` | Todo de una vez | las tres carpetas | 465 KB |
+| `cyberpunk-extension.zip` | La extensión sola | `extensions/Others/CyberpunkTheme` | 99 KB |
+| `cyberpunk-extension-con-tema.zip` | Extensión + tema (sin estilos) | `extensions/…` + `themes/cyberpunk` | 251 KB |
+| `cyberpunk-assets.zip` | Sólo los estilos compilados | `public/cyberpunk` | 223 KB |
+| `cyberpunk-tema.zip` | El tema completo + estilos | `themes/cyberpunk` + `public/cyberpunk` | 387 KB |
+| `cyberpunk-todo-en-uno.zip` | Todo de una vez | las tres carpetas | 475 KB |
 
 ## Si el subidor del panel rechaza los archivos grandes
 
-Si `cyberpunk-extension.zip` (89 KB) sube pero `cyberpunk-todo-en-uno.zip` (465 KB)
+Si `cyberpunk-extension.zip` (99 KB) sube pero `cyberpunk-todo-en-uno.zip` (475 KB)
 no, tu servidor tiene un límite de subida bajo. Compruébalo:
 
 ```bash
@@ -26,7 +26,7 @@ PHP-FPM y Nginx.
 
 Mientras tanto, la combinación que funciona con límites bajos es:
 
-1. Sube por el panel `cyberpunk-extension-con-tema.zip` (239 KB) → instala la
+1. Sube por el panel `cyberpunk-extension-con-tema.zip` (251 KB) → instala la
    extensión **y** el tema.
 2. Copia por FTP el contenido de `cyberpunk-assets.zip` a `public/cyberpunk/`.
 
@@ -178,8 +178,8 @@ activa **Enabled** y guarda.
 
 | Pestaña | Qué controla |
 |---|---|
-| General | Qué bloques se ven en el inicio, cinta de frases, cómo se ven las imágenes, opciones de tienda, textos |
-| Apariencia | 8 paletas de colores, colores manuales, animaciones de fondo por modo, efectos neón/scanlines/glitch, tipografía, imagen de fondo |
+| General | Qué bloques se ven en el inicio, cinta de frases, cómo se ven las imágenes, opciones de tienda, **barra de navegación**, contadores, textos |
+| Apariencia | **Los 4 diseños**, 8 paletas de colores, colores manuales, animaciones de fondo por modo, efectos neón/scanlines/glitch, tipografía, imagen de fondo |
 | Banner | Diapositivas (imagen, título, texto, botón) y frases de marketing en movimiento |
 | Marketing | Posición (izquierda/centro/derecha), tarjetas de servicios, ventajas y accesos rápidos, con **selector visual de iconos** |
 | Páginas | Páginas nuevas con tu HTML, con enlace en la barra de navegación |
@@ -189,6 +189,47 @@ activa **Enabled** y guarda.
 Botones de arriba: **Guardar cambios**, **Activar tema**, **Reinstalar archivos**,
 **Reparar base de datos**, **Reiniciar visitas** y **Restablecer todo**
 (vuelve a la configuración de fábrica).
+
+## Los cuatro diseños
+
+En **Apariencia → Diseño** hay cuatro botones. Pulsa uno, confirma, y la web
+cambia de cara entera: colores del modo claro y del oscuro, tipografía, forma de
+las tarjetas, esquinas, efectos y animaciones de fondo.
+
+| Diseño | Cómo se ve |
+|---|---|
+| **Cyberpunk** | El original: neón, esquinas cortadas, rejilla, scanlines, tipografía Orbitron y estrellas de fondo. |
+| **Corporativo** | Azul sobrio con verde azulado, tarjetas redondeadas con sombra suave, tipografía del sistema y **sin efectos**. Serio, de empresa de toda la vida. |
+| **Minimalista** | Casi negro sobre blanco, tarjetas planas con borde fino, mucho aire y nada de adornos. El más rápido. |
+| **Premium** | Fondo oscuro con dorado, títulos con serifa y una aurora suave de fondo. Aire de marca cuidada. |
+
+**Tu contenido no se toca**: el banner, las tarjetas de marketing, las páginas,
+las publicaciones y las reseñas siguen igual. Sólo cambia el aspecto.
+
+Después de aplicar un diseño puedes seguir retocando lo que quieras: las
+secciones *Ajustes finos del diseño* (tarjetas, esquinas, tipografía),
+*Colores* y *Efectos y fondo* siguen mandando sobre lo que puso el diseño.
+En cuanto cambias algo a mano, el diseño activo pasa a decir «Personalizado».
+
+## Barra de navegación
+
+En **General → Barra de navegación**:
+
+- **Posición de los enlaces**: junto al logo, en el centro o a la derecha.
+- **Estilo del menú**:
+  - *Barra con los enlaces a la vista* (por defecto) — como siempre; en el móvil
+    se pliegan en el botón de las tres rayas.
+  - *Botón que abre un panel lateral* — los enlaces desaparecen de la barra y el
+    botón de las tres rayas se ve **también en el ordenador**.
+- **El panel se abre por**: la derecha o la izquierda.
+
+El panel lateral lleva dentro, sin tener que dar un segundo clic en el avatar:
+los enlaces del sitio, las opciones de la cuenta (panel, servicios, facturas,
+tickets, cuenta), **el acceso al panel de administración** y cerrar sesión.
+
+El enlace de administración sólo lo ve quien tiene rol de administrador: el
+filtro lo aplica el propio Paymenter (`Navigation::getAccountDropdownLinks()`),
+así que un cliente normal ni siquiera lo tiene en el HTML.
 
 ### Ajustes que quizá busques
 
@@ -209,6 +250,28 @@ Botones de arriba: **Guardar cambios**, **Activar tema**, **Reinstalar archivos*
 - **Selector de iconos**: en las tarjetas, ventajas, accesos rápidos y páginas el
   icono se elige de una lista donde se ve dibujado. Escribe en inglés para buscar
   entre todos los iconos disponibles (`server`, `cloud`, `robot`, `whatsapp`...).
+- **Animaciones de fondo** (Apariencia): lluvia, tormenta con rayos, nieve,
+  estrellas, estrellas fugaces, nubes, planetas, aurora, lluvia digital y
+  rejilla. Se combinan varias a la vez y cada modo (claro / oscuro) lleva las
+  suyas. Dos ajustes al lado:
+  - *Cantidad de animación* — **Ligera** (para equipos lentos), Normal o Intensa.
+    Controla cuántas gotas, copos o columnas se dibujan.
+  - *Animaciones también en el móvil* — **desactivado** por defecto: en el móvil
+    gastan batería y apenas se aprecian.
+
+  Si el sistema del visitante pide «reducir movimiento», las animaciones se
+  paran solas.
+
+### Si el tema te va lento
+
+1. *Apariencia → Animaciones de fondo* → **Cantidad de animación: Ligera**, o
+   desmarca las que no uses. Con muchas a la vez (tormenta + nieve + lluvia
+   digital) se dibujan cientos de elementos.
+2. *Apariencia → Efectos y fondo* → quita **scanlines**, **ruido** y **glitch**;
+   son los que más pintan.
+3. Aplica el diseño **Minimalista**: no lleva efectos ni animaciones y usa la
+   tipografía del sistema (no descarga fuentes).
+4. En el servidor, lo de siempre: `php artisan optimize` y caché de vistas.
 
 ## Reseñas con estrellas
 
@@ -238,11 +301,20 @@ de la comunidad**. Si eliges *«Las que yo elija y, si faltan, las mejores»*, e
 hueco que quede se rellena solo con las reseñas de 4 y 5 estrellas.
 
 También puedes destacar una reseña sobre la marcha desde
-**Admin → Extensions → Comunidad · Comentarios**, con el botón
+**Admin → Extensions → Comunidad · Reseñas**, con el botón
 *Destacar en el inicio*.
 
-Moderación: **Admin → Extensions → Comunidad · Publicaciones** y
-**Comunidad · Comentarios**.
+### Moderación: tres apartados separados
+
+| Apartado | Qué hay dentro |
+|---|---|
+| **Comunidad · Publicaciones** | Lo que publican los usuarios en la comunidad. |
+| **Comunidad · Reseñas** | Sólo las reseñas con estrellas (de un plan o del servicio), con la nota, sobre qué es, cuántas respuestas tiene, si está destacada y si está aprobada. Filtros por estrellas, origen, destacadas y pendientes. |
+| **Comunidad · Comentarios** | Sólo los comentarios y las respuestas, sin estrellas. |
+
+Antes las reseñas y los comentarios estaban mezclados en la misma lista. Ahora
+son dos apartados distintos, y en los tres se puede **buscar por nombre,
+apellido o correo** del usuario.
 
 Sin la extensión, los ajustes básicos del tema (colores, textos, efectos, redes)
 están en **Admin → Settings → Theme**.

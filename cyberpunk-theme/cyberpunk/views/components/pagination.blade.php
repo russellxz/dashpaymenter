@@ -19,7 +19,7 @@
                                 abs($paginator->currentPage() - $page) <= 1)
                             <span>
                                 <button wire:click="gotoPage({{ $page }})" wire:loading.attr="disabled"
-                                    class="{{ $page === $paginator->currentPage() ? 'bg-primary text-white' : 'bg-background-secondary text-base border border-neutral hover:border-primary/60' }} px-4 py-2 rounded-lg cursor-pointer">{{ $page }}</button>
+                                    class="{{ $page === $paginator->currentPage() ? 'bg-primary text-inverted' : 'bg-background-secondary text-base border border-neutral hover:border-primary/60' }} px-4 py-2 rounded-lg cursor-pointer">{{ $page }}</button>
                             </span>
                         @elseif($page == 3 || $page == $paginator->lastPage() - 3)
                             <span class="bg-background-secondary text-base border border-neutral hover:border-primary/60 px-4 py-2 rounded-lg">

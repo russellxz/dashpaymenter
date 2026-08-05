@@ -19,6 +19,7 @@ use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 use Paymenter\Extensions\Others\CyberpunkTheme\Admin\Resources\PostResource\Pages\EditPost;
 use Paymenter\Extensions\Others\CyberpunkTheme\Admin\Resources\PostResource\Pages\ListPosts;
+use Paymenter\Extensions\Others\CyberpunkTheme\Admin\Support\UserColumn;
 use Paymenter\Extensions\Others\CyberpunkTheme\Models\Post;
 
 /**
@@ -55,7 +56,7 @@ class PostResource extends Resource
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
-                TextColumn::make('user.name')->label('Usuario')->searchable()->sortable(),
+                UserColumn::make(),
                 TextColumn::make('title')->label('Título')->searchable()->limit(30)->placeholder('—'),
                 TextColumn::make('content')->label('Contenido')->limit(60)->wrap(),
                 TextColumn::make('media_count')->label('Archivos')->counts('media'),

@@ -18,57 +18,33 @@
  * Así el tema sigue siendo compatible con cualquier extensión instalada
  * después, sin necesidad de recompilar.
  */
-@source inline("{md:,lg:,}{flex,grid,block,inline-flex,inline-block,hidden}");
-@source inline("{md:,lg:,}grid-cols-{1,2,3,4,5,6}");
-@source inline("{md:,lg:,}col-span-{1,2,3,4,full}");
-@source inline("{gap,p,px,py,mt,mb}-{0,1,2,3,4,5,6,8,10,12,16}");
-@source inline("{w,h}-{full,fit,auto,screen,4,6,8,10,12,16,20,24,32,48,64}");
-@source inline("text-{xs,sm,base,lg,xl,2xl,3xl,4xl}");
-@source inline("{text,bg,border,fill}-{primary,secondary,accent,neutral,base,muted,inverted,background,background-secondary,success,error,warning,info,inactive}");
-@source inline("{hover:,}{text,bg,border}-{primary,secondary,accent,base,success,error,warning,info}/{10,20,50,70,80}");
-@source inline("{text,bg,border}-{red,green,blue,yellow,gray}-{300,500,600,700,900}");
-@source inline("rounded-{sm,md,lg,xl,2xl,full}");
-@source inline("{items,justify}-{start,end,center,between,around}");
-@source inline("{flex-col,flex-row,flex-wrap,flex-1,flex-grow,shrink-0,grow}");
-@source inline("border-{0,2,4}");
-@source inline("{space-x,space-y}-{1,2,3,4,6}");
-@source inline("font-{normal,medium,semibold,bold,black}");
-@source inline("{uppercase,italic,underline,truncate,cursor-pointer,select-none,transition,animate-spin,animate-pulse}");
-@source inline("{opacity,z}-{0,10,20,50,80,100}");
-@source inline("{absolute,relative,fixed,sticky,inset-0,top-0,bottom-0,left-0,right-0}");
-@source inline("overflow-{auto,hidden,visible}");
-@source inline("shadow-{sm,md,lg,xl,none}");
-@source inline("max-w-{sm,md,lg,xl,2xl,3xl,4xl,5xl,6xl,7xl,full,fit}");
-@source inline("size-{3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32}");
-@source inline("{w,h}-{7,9,11,14,28,36,40,44,52,56,72,80,96}");
-@source inline("{min-h,max-h}-{0,20,32,40,48,56,64,80,96}");
-@source inline("line-clamp-{1,2,3,4,none}");
-@source inline("aspect-{square,video,auto}");
-@source inline("object-{cover,contain,center,top}");
-@source inline("{grid-cols,gap}-{1,2,3,4,5,6}");
-@source inline("{ps,pe,ms,me,pl,pr,ml,mr}-{1,2,3,4,5,6,8,10,12}");
-@source inline("{border-s,border-e,border-l,border-r}-{2,4}");
-@source inline("{rounded-full,rounded-2xl,rounded-3xl,shrink-0,truncate,whitespace-pre-line,break-words}");
-@source inline("{col,row}-start-{1,2}");
-@source inline("self-{start,end,center,stretch,auto}");
-@source inline("justify-items-{start,end,center,stretch}");
-@source inline("{mx,my}-{auto,0}");
-@source inline("text-{left,center,right}");
-@source inline("max-h-[{22,24,26,30,32,34,36,40}rem]");
-@source inline("bg-black");
-@source inline("scroll-mt-{16,24}");
-@source inline("blur-{sm,md,lg,xl,2xl,3xl}");
-@source inline("scale-{100,105,110}");
-@source inline("max-h-[{70,80,85,90}vh]");
-@source inline("{-,}translate-{x,y}-1/2");
-@source inline("{left,right,top,bottom}-{2,3,3.5,4}");
-@source inline("min-w-[110px]");
-@source inline("pointer-events-none");
-@source inline("tabular-nums");
-@source inline("{w,h}-{5,6,8,10}");
-@source inline("text-{4xl,5xl,6xl}");
-@source inline("hover:scale-{105,110}");
-@source inline("{leading-none,leading-snug,leading-relaxed}");
+/*
+ * Safelist mínima: sólo lo que una extensión de terceros puede necesitar y
+ * que el tema no usa en sus propias vistas. Todo lo demás se genera al
+ * escanear themes/cyberpunk/views y extensions/, así que no hace falta
+ * declararlo aquí: cada línea de más es CSS que el navegador tiene que
+ * descargar y analizar en cada visita.
+ */
+@source inline("{sm:,md:,lg:,}{flex,grid,block,inline-flex,inline-block,hidden}");
+@source inline("{sm:,md:,lg:,}grid-cols-{1,2,3,4,6}");
+@source inline("{md:,lg:,}col-span-{1,2,3,full}");
+@source inline("{gap,p,px,py,mt,mb}-{1,2,3,4,5,6,8,10,12}");
+@source inline("{w,h}-{full,fit,auto,4,5,6,8,10,12,16,20,24}");
+@source inline("size-{3,4,5,6,8,10,12}");
+@source inline("text-{xs,sm,base,lg,xl,2xl,3xl}");
+@source inline("{text,bg,border}-{primary,secondary,accent,neutral,base,muted,inverted,background,background-secondary,success,error,warning,info}");
+@source inline("{text,bg,border}-{primary,accent,success,error,warning}/{10,20,50}");
+@source inline("rounded-{md,lg,xl,2xl,full}");
+@source inline("{items,justify}-{start,end,center,between}");
+@source inline("{flex-col,flex-row,flex-wrap,flex-1,flex-grow,shrink-0}");
+@source inline("{font-semibold,font-bold,uppercase,underline,truncate,cursor-pointer,transition,animate-spin,animate-pulse}");
+@source inline("{absolute,relative,fixed,sticky,inset-0}");
+@source inline("overflow-{auto,hidden}");
+@source inline("shadow-{sm,md,lg}");
+@source inline("max-w-{sm,md,lg,xl,2xl,3xl,4xl,full}");
+@source inline("{space-x,space-y}-{2,3,4}");
+@source inline("line-clamp-{2,3}");
+@source inline("border-{0,2}");
 
 @theme {
     /* Tipografía por defecto: pila del sistema (se puede cambiar desde el admin) */
@@ -795,12 +771,122 @@
 
 /*
 |--------------------------------------------------------------------------
+| Diseños
+|--------------------------------------------------------------------------
+| El tema trae cuatro looks distintos. Cambian la forma de las tarjetas, las
+| esquinas y el peso visual; los colores y la tipografía los aplica el propio
+| diseño al elegirlo desde el panel, así que después se pueden retocar.
+*/
+
+/* --- Tarjetas: esquinas cortadas (cyberpunk) --- */
+.cyber-cards-clip .cyber-card {
+    backdrop-filter: blur(6px);
+}
+
+/* --- Tarjetas: redondeadas con sombra (corporativo / premium) --- */
+.cyber-cards-soft .cyber-clip,
+.cyber-cards-soft .cyber-clip-sm,
+.cyber-cards-flat .cyber-clip,
+.cyber-cards-flat .cyber-clip-sm {
+    clip-path: none;
+}
+
+.cyber-cards-soft .cyber-card {
+    background: hsl(var(--color-background-secondary));
+    border-color: hsl(var(--color-neutral) / 0.85);
+    border-radius: 0.9rem;
+    backdrop-filter: none;
+    box-shadow:
+        0 1px 2px hsl(220 40% 10% / 0.06),
+        0 8px 24px -12px hsl(220 40% 10% / 0.18);
+}
+
+.cyber-cards-soft .cyber-card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 2px 4px hsl(220 40% 10% / 0.08),
+        0 18px 40px -16px hsl(var(--color-primary) / 0.35);
+    border-color: hsl(var(--color-primary) / 0.45);
+}
+
+/* --- Tarjetas: planas (minimalista) --- */
+.cyber-cards-flat .cyber-card {
+    background: transparent;
+    border-color: hsl(var(--color-neutral));
+    border-radius: 0.6rem;
+    backdrop-filter: none;
+    box-shadow: none;
+}
+
+.cyber-cards-flat .cyber-card-hover:hover {
+    transform: none;
+    border-color: hsl(var(--color-accent) / 0.7);
+    box-shadow: none;
+}
+
+/* --- Esquinas redondeadas para botones y demás --- */
+.cyber-corners-round .cyber-clip,
+.cyber-corners-round .cyber-clip-sm {
+    clip-path: none;
+    border-radius: 0.9rem;
+}
+
+/* --- Sin neón: los diseños sobrios apagan brillos y glitch --- */
+.cyber-design-corporativo .cyber-neon-text,
+.cyber-design-minimal .cyber-neon-text,
+.cyber-design-premium .cyber-neon-text {
+    text-shadow: none;
+}
+
+.cyber-design-minimal .cyber-gradient-text {
+    background-image: none;
+    color: hsl(var(--color-base));
+    -webkit-text-fill-color: currentColor;
+}
+
+/* Minimalista: títulos más finos y con más aire */
+.cyber-design-minimal h1,
+.cyber-design-minimal h2,
+.cyber-design-minimal h3 {
+    letter-spacing: -0.02em;
+}
+
+.cyber-design-minimal .cyber-divider {
+    background: hsl(var(--color-neutral));
+    height: 1px;
+    opacity: 0.7;
+}
+
+/* Premium: títulos con serifa y un filete dorado bajo las secciones */
+.cyber-design-premium h1,
+.cyber-design-premium h2 {
+    font-family: ui-serif, Georgia, "Times New Roman", serif;
+    letter-spacing: 0;
+}
+
+.cyber-design-premium .cyber-divider {
+    background-image: linear-gradient(
+        90deg,
+        hsl(var(--color-primary)),
+        transparent 45%
+    );
+}
+
+/* Corporativo: encabezados algo más compactos y botones sólidos */
+.cyber-design-corporativo .cyber-chip {
+    border-radius: 999px;
+}
+
+/*
+|--------------------------------------------------------------------------
 | Animaciones de fondo (lluvia, truenos, estrellas, nubes, planetas...)
 |--------------------------------------------------------------------------
 | Se activan por separado para el modo claro y el oscuro desde
 | Admin → Extensions → Cyberpunk Theme → Apariencia.
-| Todo es CSS puro (sólo transform/opacity) para que no penalice el
-| rendimiento y no dependa de imágenes externas.
+|
+| Todo se mueve con `transform` y `opacity`, que la tarjeta gráfica resuelve
+| sola sin volver a calcular el diseño de la página. Cada capa está aislada
+| con `contain` para que el navegador no repinte el resto del sitio.
 */
 
 .cyber-anim {
@@ -809,6 +895,7 @@
     pointer-events: none;
     overflow: hidden;
     z-index: 0;
+    contain: strict;
 }
 
 /* Cada capa sólo se ve en su modo */
@@ -820,309 +907,470 @@ body.dark .cyber-anim[data-mode="light"] {
     display: none;
 }
 
+/* Quien pide menos movimiento en su sistema, no ve ninguna animación. */
+@media (prefers-reduced-motion: reduce) {
+    .cyber-anim {
+        display: none !important;
+    }
+}
+
+/* En pantallas pequeñas se pueden desactivar desde el panel: es donde más
+   se nota el gasto de batería. */
+body.cyber-no-anim-mobile .cyber-anim {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    body.cyber-no-anim-mobile .cyber-anim {
+        display: block;
+    }
+
+    body.cyber-no-anim-mobile:not(.dark) .cyber-anim[data-mode="dark"],
+    body.cyber-no-anim-mobile.dark .cyber-anim[data-mode="light"] {
+        display: none;
+    }
+}
+
 /* ------------------------------------------------------------- Lluvia */
-.cyber-anim-rain::before,
-.cyber-anim-rain::after {
-    content: "";
+/* Gotas de verdad: rayas cortas que caen a distintas velocidades, no un
+   patrón de rayas moviéndose en bloque. */
+.cyber-drop {
     position: absolute;
-    inset: -50% 0;
-    background-image: repeating-linear-gradient(
-        105deg,
-        transparent 0 6px,
-        hsl(var(--color-accent) / 0.28) 6px 7px,
-        transparent 7px 22px
+    top: -14vh;
+    left: var(--x);
+    width: 2px;
+    height: var(--len, 70px);
+    border-radius: 999px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        hsl(200 90% 80% / 0.65) 35%,
+        hsl(195 100% 92% / 0.95)
     );
-    animation: cyber-rain 0.75s linear infinite;
+    box-shadow: 0 0 6px hsl(200 100% 80% / 0.45);
+    opacity: var(--op, 0.6);
+    transform: translate3d(0, 0, 0);
+    animation: cyber-drop-fall var(--dur, 0.9s) linear var(--delay, 0s) infinite;
+    will-change: transform;
 }
 
-.cyber-anim-rain::after {
-    opacity: 0.5;
-    background-image: repeating-linear-gradient(
-        100deg,
-        transparent 0 11px,
-        hsl(var(--color-primary) / 0.22) 11px 12px,
-        transparent 12px 34px
-    );
-    animation-duration: 1.25s;
-}
-
-@keyframes cyber-rain {
+@keyframes cyber-drop-fall {
     from {
-        transform: translate3d(0, -25%, 0);
+        transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translate3d(-12%, 25%, 0);
+        transform: translate3d(-6vw, 125vh, 0);
     }
+}
+
+/* Salpicaduras al llegar abajo */
+.cyber-splash {
+    position: absolute;
+    bottom: 0;
+    left: var(--x);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid hsl(200 95% 85% / 0.7);
+    opacity: 0;
+    transform: scale(0.2);
+    animation: cyber-splash var(--dur, 2.4s) ease-out var(--delay, 0s) infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes cyber-splash {
+    0% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+    6% {
+        opacity: 0.5;
+    }
+    22% {
+        opacity: 0;
+        transform: scale(1.4);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.4);
+    }
+}
+
+/* En modo claro la lluvia se ve mejor en gris azulado */
+body:not(.dark) .cyber-drop {
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        hsl(212 40% 45% / 0.55) 35%,
+        hsl(212 55% 35% / 0.8)
+    );
+    box-shadow: none;
+}
+
+body:not(.dark) .cyber-splash {
+    border-color: hsl(215 25% 45% / 0.45);
 }
 
 /* ------------------------------------------------------------ Truenos */
+/* Nubes oscuras arriba + destello general + un rayo dibujado que baja. */
 .cyber-anim-storm::before {
     content: "";
     position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        ellipse at 60% 0%,
-        hsl(var(--color-accent) / 0.55),
-        transparent 60%
+    inset: 0 0 auto 0;
+    height: 45vh;
+    background: linear-gradient(
+        to bottom,
+        hsl(230 40% 8% / 0.75),
+        transparent
     );
-    opacity: 0;
-    animation: cyber-thunder 9s linear infinite;
+    animation: cyber-storm-clouds 12s ease-in-out infinite alternate;
+    will-change: opacity;
 }
 
-.cyber-anim-storm::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: hsl(0 0% 100% / 0.75);
-    opacity: 0;
-    animation: cyber-thunder-flash 9s linear infinite;
-}
-
-@keyframes cyber-thunder {
-    0%,
-    72%,
-    100% {
-        opacity: 0;
+@keyframes cyber-storm-clouds {
+    from {
+        opacity: 0.55;
     }
-    74% {
+    to {
         opacity: 0.9;
     }
-    76% {
-        opacity: 0.15;
+}
+
+/* Destello que ilumina toda la pantalla */
+.cyber-flash {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            ellipse 60% 40% at var(--fx, 50%) 0%,
+            hsl(0 0% 100% / 0.85),
+            transparent 70%
+        );
+    opacity: 0;
+    animation: cyber-flash var(--dur, 9s) linear var(--delay, 0s) infinite;
+    will-change: opacity;
+}
+
+@keyframes cyber-flash {
+    0%,
+    88%,
+    100% {
+        opacity: 0;
     }
-    78% {
-        opacity: 0.75;
+    89% {
+        opacity: 0.9;
     }
-    82% {
+    90.5% {
+        opacity: 0.1;
+    }
+    92% {
+        opacity: 0.7;
+    }
+    94% {
         opacity: 0;
     }
 }
 
-@keyframes cyber-thunder-flash {
+/* El rayo: un SVG de verdad, que se dibuja con el destello */
+.cyber-bolt {
+    position: absolute;
+    top: -2vh;
+    left: var(--x, 50%);
+    width: var(--w, 90px);
+    height: var(--len, 42vh);
+    opacity: 0;
+    transform-origin: top center;
+    filter: drop-shadow(0 0 10px hsl(200 100% 80% / 0.95))
+        drop-shadow(0 0 26px hsl(210 100% 70% / 0.6));
+    animation: cyber-bolt var(--dur, 9s) linear var(--delay, 0s) infinite;
+    will-change: opacity;
+}
+
+.cyber-bolt svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@keyframes cyber-bolt {
     0%,
-    73%,
+    88.6%,
     100% {
         opacity: 0;
     }
-    74% {
-        opacity: 0.35;
+    88.8% {
+        opacity: 1;
     }
-    75% {
-        opacity: 0;
+    89.6% {
+        opacity: 0.1;
     }
-    78.5% {
-        opacity: 0.25;
+    90.2% {
+        opacity: 0.95;
     }
-    80% {
+    91.4% {
         opacity: 0;
     }
 }
 
 /* ---------------------------------------------------------- Estrellas */
+/* Puntos fijos que titilan: dos capas con ritmos distintos.
+   Se dibujan con gradientes porque son estáticos (sólo cambia la opacidad),
+   así que no cuesta nada. */
 .cyber-anim-stars::before,
 .cyber-anim-stars::after {
     content: "";
     position: absolute;
     inset: 0;
     background-image:
-        radial-gradient(1.4px 1.4px at 12% 18%, hsl(var(--color-base) / 0.85), transparent),
-        radial-gradient(1.2px 1.2px at 28% 62%, hsl(var(--color-base) / 0.6), transparent),
+        radial-gradient(1.4px 1.4px at 12% 18%, hsl(0 0% 100% / 0.9), transparent),
+        radial-gradient(1.2px 1.2px at 28% 62%, hsl(0 0% 100% / 0.65), transparent),
         radial-gradient(1.6px 1.6px at 44% 28%, hsl(var(--color-accent) / 0.9), transparent),
-        radial-gradient(1.1px 1.1px at 61% 74%, hsl(var(--color-base) / 0.7), transparent),
-        radial-gradient(1.5px 1.5px at 73% 12%, hsl(var(--color-primary) / 0.85), transparent),
-        radial-gradient(1.2px 1.2px at 86% 52%, hsl(var(--color-base) / 0.65), transparent),
-        radial-gradient(1.3px 1.3px at 94% 84%, hsl(var(--color-secondary) / 0.8), transparent),
-        radial-gradient(1.1px 1.1px at 6% 88%, hsl(var(--color-base) / 0.5), transparent);
-    background-size: 100% 100%;
-    animation: cyber-twinkle 4.5s ease-in-out infinite;
+        radial-gradient(1px 1px at 58% 74%, hsl(0 0% 100% / 0.55), transparent),
+        radial-gradient(1.8px 1.8px at 72% 34%, hsl(0 0% 100% / 0.8), transparent),
+        radial-gradient(1.2px 1.2px at 86% 58%, hsl(var(--color-primary) / 0.8), transparent),
+        radial-gradient(1px 1px at 94% 16%, hsl(0 0% 100% / 0.6), transparent),
+        radial-gradient(1.4px 1.4px at 8% 82%, hsl(0 0% 100% / 0.7), transparent),
+        radial-gradient(1px 1px at 36% 92%, hsl(var(--color-secondary) / 0.7), transparent),
+        radial-gradient(1.2px 1.2px at 64% 8%, hsl(0 0% 100% / 0.65), transparent);
+    animation: cyber-twinkle 4.5s ease-in-out infinite alternate;
+    will-change: opacity;
 }
 
 .cyber-anim-stars::after {
-    transform: scale(1.7) rotate(18deg);
-    opacity: 0.55;
-    animation-delay: -2.2s;
-    animation-duration: 6.5s;
+    background-image:
+        radial-gradient(1px 1px at 20% 42%, hsl(0 0% 100% / 0.7), transparent),
+        radial-gradient(1.6px 1.6px at 52% 52%, hsl(0 0% 100% / 0.55), transparent),
+        radial-gradient(1.2px 1.2px at 78% 88%, hsl(var(--color-accent) / 0.7), transparent),
+        radial-gradient(1px 1px at 4% 34%, hsl(0 0% 100% / 0.6), transparent),
+        radial-gradient(1.4px 1.4px at 88% 74%, hsl(0 0% 100% / 0.65), transparent),
+        radial-gradient(1px 1px at 46% 14%, hsl(var(--color-primary) / 0.6), transparent);
+    animation-duration: 7s;
+    animation-delay: -2.5s;
 }
 
 @keyframes cyber-twinkle {
-    0%,
-    100% {
-        opacity: 0.75;
+    from {
+        opacity: 0.35;
     }
-    50% {
-        opacity: 0.25;
+    to {
+        opacity: 1;
     }
 }
 
+/* En modo claro las estrellas no pintan nada: se quedan muy tenues */
+body:not(.dark) .cyber-anim-stars::before,
+body:not(.dark) .cyber-anim-stars::after {
+    opacity: 0.18;
+}
+
 /* --------------------------------------------------- Estrellas fugaces */
-.cyber-anim-shooting .cyber-shooting-star {
+.cyber-shooting-star {
     position: absolute;
     top: var(--sy, 10%);
-    left: var(--sx, 8%);
-    width: 160px;
+    left: var(--sx, 10%);
+    width: 2px;
     height: 2px;
-    border-radius: 999px;
+    border-radius: 50%;
+    background: hsl(0 0% 100%);
+    box-shadow: 0 0 6px 1px hsl(0 0% 100% / 0.9);
+    opacity: 0;
+    animation: cyber-shoot var(--sd, 9s) ease-in var(--sdelay, 0s) infinite;
+    will-change: transform, opacity;
+}
+
+/* La estela va detrás, en la dirección contraria al movimiento */
+.cyber-shooting-star::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 120px;
+    height: 1px;
+    transform: translateY(-50%);
     background: linear-gradient(
-        90deg,
-        hsl(var(--color-base) / 0.95),
-        hsl(var(--color-accent) / 0.55),
+        to left,
+        hsl(0 0% 100% / 0.85),
         transparent
     );
-    filter: drop-shadow(0 0 6px hsl(var(--color-accent) / 0.85));
-    opacity: 0;
-    transform: rotate(28deg) translate3d(0, 0, 0);
-    animation: cyber-shoot var(--sd, 7s) linear infinite;
-    animation-delay: var(--sdelay, 0s);
 }
 
 @keyframes cyber-shoot {
     0% {
         opacity: 0;
-        transform: rotate(28deg) translate3d(-10vw, -10vh, 0) scaleX(0.2);
+        transform: translate3d(0, 0, 0);
     }
-    6% {
+    3% {
         opacity: 1;
     }
-    26% {
+    16% {
         opacity: 1;
-        transform: rotate(28deg) translate3d(75vw, 55vh, 0) scaleX(1);
+        transform: translate3d(46vw, 34vh, 0);
     }
-    34%,
+    20%,
     100% {
         opacity: 0;
-        transform: rotate(28deg) translate3d(95vw, 70vh, 0) scaleX(0.4);
+        transform: translate3d(58vw, 43vh, 0);
     }
 }
 
 /* -------------------------------------------------------------- Nubes */
-.cyber-anim-clouds .cyber-cloud {
+/* Una nube = varias burbujas desenfocadas, no un óvalo plano. */
+.cyber-cloud {
     position: absolute;
-    top: var(--cy, 15%);
+    top: var(--cy, 20%);
     left: -30%;
     width: var(--cw, 320px);
     height: var(--ch, 110px);
-    border-radius: 999px;
-    background: radial-gradient(
-        ellipse at 50% 60%,
-        hsl(var(--color-base) / 0.16),
-        transparent 70%
-    );
+    opacity: var(--cop, 0.5);
+    animation: cyber-cloud-drift var(--cd, 80s) linear var(--cdelay, 0s) infinite;
+    will-change: transform;
+}
+
+.cyber-cloud::before,
+.cyber-cloud::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: hsl(0 0% 100% / 0.85);
     filter: blur(14px);
-    animation: cyber-drift var(--cd, 60s) linear infinite;
-    animation-delay: var(--cdelay, 0s);
 }
 
-body:not(.dark) .cyber-anim-clouds .cyber-cloud {
-    background: radial-gradient(
-        ellipse at 50% 60%,
-        hsl(var(--color-primary) / 0.13),
-        transparent 70%
-    );
+.cyber-cloud::before {
+    inset: 30% 0 0 0;
+    border-radius: 999px;
 }
 
-@keyframes cyber-drift {
+.cyber-cloud::after {
+    left: 18%;
+    top: 0;
+    width: 55%;
+    height: 72%;
+}
+
+body.dark .cyber-cloud::before,
+body.dark .cyber-cloud::after {
+    background: hsl(var(--color-primary) / 0.22);
+}
+
+@keyframes cyber-cloud-drift {
     from {
         transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translate3d(165vw, -4vh, 0);
+        transform: translate3d(160vw, 0, 0);
     }
 }
 
 /* ----------------------------------------------------------- Planetas */
-.cyber-anim-planets .cyber-planet {
+.cyber-planet {
     position: absolute;
     top: var(--py, 20%);
-    left: var(--px, 75%);
+    left: var(--px, 70%);
     width: var(--ps, 120px);
     height: var(--ps, 120px);
     border-radius: 50%;
     background:
-        radial-gradient(circle at 32% 30%, hsl(var(--color-accent) / 0.85), transparent 55%),
-        radial-gradient(circle at 70% 72%, hsl(var(--color-primary) / 0.7), transparent 60%),
-        radial-gradient(circle at 50% 50%, hsl(var(--color-secondary) / 0.35), hsl(var(--color-background) / 0.9) 72%);
+        radial-gradient(
+            circle at 32% 30%,
+            hsl(var(--color-primary) / 0.55),
+            hsl(var(--color-secondary) / 0.4) 45%,
+            hsl(230 40% 8% / 0.85) 100%
+        );
     box-shadow:
-        inset -14px -10px 30px hsl(0 0% 0% / 0.55),
-        0 0 40px -8px hsl(var(--color-primary) / 0.5);
-    opacity: 0.5;
-    animation: cyber-orbit var(--pd, 40s) ease-in-out infinite alternate;
-    animation-delay: var(--pdelay, 0s);
+        inset -12px -10px 26px hsl(230 60% 4% / 0.75),
+        0 0 40px hsl(var(--color-primary) / 0.25);
+    opacity: 0.55;
+    animation: cyber-planet-float var(--pd, 50s) ease-in-out var(--pdelay, 0s) infinite alternate;
+    will-change: transform;
 }
 
-.cyber-anim-planets .cyber-planet::after {
+/* Anillo */
+.cyber-planet::after {
     content: "";
     position: absolute;
-    inset: -22% -42%;
+    left: -35%;
+    top: 42%;
+    width: 170%;
+    height: 26%;
     border-radius: 50%;
     border: 2px solid hsl(var(--color-accent) / 0.35);
-    transform: rotate(-22deg) scaleY(0.28);
+    border-bottom-color: transparent;
+    transform: rotate(-18deg);
 }
 
-@keyframes cyber-orbit {
+@keyframes cyber-planet-float {
     from {
-        transform: translate3d(0, 0, 0) rotate(0deg);
+        transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translate3d(-9vw, 7vh, 0) rotate(14deg);
+        transform: translate3d(2.5vw, -3.5vh, 0);
     }
 }
 
-/* --------------------------------------------------------------- Nieve */
-.cyber-anim-snow::before,
-.cyber-anim-snow::after {
-    content: "";
+/* -------------------------------------------------------------- Nieve */
+.cyber-flake {
     position: absolute;
-    inset: -50% 0;
-    background-image:
-        radial-gradient(2.5px 2.5px at 10% 10%, hsl(var(--color-base) / 0.75), transparent),
-        radial-gradient(2px 2px at 35% 45%, hsl(var(--color-base) / 0.6), transparent),
-        radial-gradient(2.5px 2.5px at 62% 22%, hsl(var(--color-base) / 0.7), transparent),
-        radial-gradient(2px 2px at 82% 68%, hsl(var(--color-base) / 0.55), transparent);
-    background-size: 240px 240px;
-    animation: cyber-snow 14s linear infinite;
+    top: -6vh;
+    left: var(--x);
+    width: var(--size, 6px);
+    height: var(--size, 6px);
+    border-radius: 50%;
+    background: hsl(0 0% 100% / 0.85);
+    filter: blur(0.4px);
+    opacity: var(--op, 0.85);
+    box-shadow: 0 0 5px hsl(0 0% 100% / 0.5);
+    animation: cyber-flake-fall var(--dur, 12s) linear var(--delay, 0s) infinite;
+    will-change: transform;
 }
 
-.cyber-anim-snow::after {
-    background-size: 170px 170px;
-    opacity: 0.6;
-    animation-duration: 22s;
-    animation-direction: reverse;
-}
-
-@keyframes cyber-snow {
-    from {
-        transform: translate3d(0, -20%, 0);
+@keyframes cyber-flake-fall {
+    0% {
+        transform: translate3d(0, 0, 0);
     }
-    to {
-        transform: translate3d(6%, 20%, 0);
+    25% {
+        transform: translate3d(3vw, 28vh, 0);
+    }
+    50% {
+        transform: translate3d(-2vw, 55vh, 0);
+    }
+    75% {
+        transform: translate3d(3vw, 82vh, 0);
+    }
+    100% {
+        transform: translate3d(0, 110vh, 0);
     }
 }
 
-/* ------------------------------------------------- Lluvia digital (matrix) */
-.cyber-anim-matrix::before {
-    content: "";
+body:not(.dark) .cyber-flake {
+    background: hsl(210 40% 70% / 0.8);
+}
+
+/* ------------------------------------------------------- Lluvia digital */
+/* Columnas de código que caen, estilo Matrix. */
+.cyber-matrix-col {
     position: absolute;
-    inset: -50% 0;
-    background-image: repeating-linear-gradient(
-        180deg,
-        hsl(var(--color-accent) / 0.22) 0 12px,
-        transparent 12px 26px
+    top: -100%;
+    left: var(--x);
+    width: 1.5px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        hsl(140 90% 55% / 0.35) 45%,
+        hsl(140 100% 70% / 0.85) 92%,
+        hsl(0 0% 100% / 0.95)
     );
-    background-size: 26px 100%;
-    mask-image: repeating-linear-gradient(
-        90deg,
-        #000 0 2px,
-        transparent 2px 26px
-    );
-    animation: cyber-matrix 3.2s linear infinite;
+    opacity: var(--op, 0.55);
+    animation: cyber-matrix-fall var(--dur, 4s) linear var(--delay, 0s) infinite;
+    will-change: transform;
 }
 
-@keyframes cyber-matrix {
+@keyframes cyber-matrix-fall {
     from {
-        transform: translate3d(0, -30%, 0);
+        transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translate3d(0, 30%, 0);
+        transform: translate3d(0, 200%, 0);
     }
 }
 
@@ -1137,6 +1385,7 @@ body:not(.dark) .cyber-anim-clouds .cyber-cloud {
         radial-gradient(45% 32% at 50% 78%, hsl(var(--color-accent) / 0.2), transparent 70%);
     filter: blur(40px);
     animation: cyber-aurora 26s ease-in-out infinite alternate;
+    will-change: transform;
 }
 
 @keyframes cyber-aurora {
@@ -1147,6 +1396,7 @@ body:not(.dark) .cyber-anim-clouds .cyber-cloud {
         transform: translate3d(5%, 4%, 0) scale(1.15);
     }
 }
+
 
 /*
 |--------------------------------------------------------------------------

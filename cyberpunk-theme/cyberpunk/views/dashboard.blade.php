@@ -145,7 +145,7 @@ $nextExpiring = $user->services()->where('status', 'active')->whereNotNull('expi
                         </div>
                         <h2 class="text-lg font-bold">{{ __('dashboard.active_services') }}</h2>
                     </div>
-                    <span class="bg-primary flex items-center justify-center font-bold rounded-md size-6 text-sm text-white">
+                    <span class="bg-primary flex items-center justify-center font-bold rounded-md size-6 text-sm text-inverted">
                         {{ $activeServices }}
                     </span>
                 </div>
@@ -173,7 +173,7 @@ $nextExpiring = $user->services()->where('status', 'active')->whereNotNull('expi
                             <x-ri-add-circle-fill class="size-5" />
                         </a>
                     </div>
-                    <span class="bg-accent flex items-center justify-center font-bold rounded-md size-6 text-sm text-white">
+                    <span class="bg-accent flex items-center justify-center font-bold rounded-md size-6 text-sm text-inverted">
                         {{ $openTickets }}
                     </span>
                 </div>
@@ -200,7 +200,7 @@ $nextExpiring = $user->services()->where('status', 'active')->whereNotNull('expi
                         </div>
                         <h2 class="text-lg font-bold">{{ __('dashboard.unpaid_invoices') }}</h2>
                     </div>
-                    <span class="bg-secondary flex items-center justify-center font-bold rounded-md size-6 text-sm text-white">
+                    <span class="bg-secondary flex items-center justify-center font-bold rounded-md size-6 text-sm text-inverted">
                         {{ $dueTotal }}
                     </span>
                 </div>

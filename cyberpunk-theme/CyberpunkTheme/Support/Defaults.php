@@ -57,7 +57,19 @@ class Defaults
             'home_page_text' => '',
             'footer_text' => 'Infraestructura de alto rendimiento para tus webs, bots y aplicaciones.',
 
+            // Barra de navegación
+            'nav_align' => 'left',
+            'nav_style' => 'bar',
+            'nav_drawer_side' => 'right',
+
+            // Diseño
+            'design' => 'cyberpunk',
+            'card_style' => 'clip',
+            'corner_style' => 'sharp',
+
             // Efectos
+            'anim_intensity' => 'normal',
+            'anim_mobile' => false,
             'effect_neon' => true,
             'effect_scanlines' => true,
             'effect_grid' => true,

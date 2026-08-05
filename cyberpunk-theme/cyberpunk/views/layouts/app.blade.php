@@ -6,6 +6,11 @@ $fxClasses = collect([
     cyber_bool('effect_glitch', true) ? 'cyber-fx-glitch' : null,
     cyber_bool('effect_noise', false) ? 'cyber-fx-noise' : null,
 ])->filter()->implode(' ');
+
+// Clases del diseño elegido: cambian la forma de las tarjetas y las esquinas.
+$fxClasses .= ' cyber-design-' . cyber_cfg('design', 'cyberpunk')
+    . ' cyber-cards-' . cyber_cfg('card_style', 'clip')
+    . ' cyber-corners-' . cyber_cfg('corner_style', 'sharp');
 $backgroundImage = cyber_media(cyber_cfg('background_image'));
 
 // Si los assets compilados no están en public/<tema>/ no podemos llamar a @vite:
@@ -55,7 +60,7 @@ $cyberHasAssets = file_exists(public_path('hot'))
     {!! hook('head') !!}
 </head>
 
-<body class="w-full bg-background text-base min-h-screen flex flex-col antialiased relative"
+<body class="w-full bg-background text-base min-h-screen flex flex-col antialiased relative {{ cyber_bool('anim_mobile', false) ? '' : 'cyber-no-anim-mobile' }}"
     x-cloak
     x-data="{
         theme: $persist('dark').as('theme_mode'),

@@ -4,6 +4,17 @@ $fonts = [
     'orbitron' => "'Orbitron', ui-sans-serif, system-ui, sans-serif",
     'rajdhani' => "'Rajdhani', ui-sans-serif, system-ui, sans-serif",
     'share-tech' => "'Share Tech Mono', ui-monospace, monospace",
+    'inter' => "'Inter', ui-sans-serif, system-ui, sans-serif",
+    // La serifa no necesita descarga: usamos las que ya trae el sistema.
+    'serif' => "ui-serif, Georgia, 'Times New Roman', serif",
+];
+
+// Fuentes que hay que traer de Google Fonts (la serifa no).
+$googleFonts = [
+    'orbitron' => 'Orbitron:wght@400;600;800',
+    'rajdhani' => 'Rajdhani:wght@400;600;700',
+    'share-tech' => 'Share+Tech+Mono',
+    'inter' => 'Inter:wght@400;500;600;700;800',
 ];
 // Este parcial también se renderiza dentro del panel de administración,
 // por lo que comprobamos que los helpers del tema estén disponibles.
@@ -14,10 +25,10 @@ $backgroundImage = $hasHelpers ? cyber_media($rawBackground) : $rawBackground;
 $overlay = max(0, min(100, (int) theme('background_overlay', 80)));
 @endphp
 
-@if(isset($fonts[$font]))
+@if(isset($googleFonts[$font]))
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family={{ $font === 'orbitron' ? 'Orbitron:wght@400;600;800' : ($font === 'rajdhani' ? 'Rajdhani:wght@400;600;700' : 'Share+Tech+Mono') }}&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family={{ $googleFonts[$font] }}&display=swap" rel="stylesheet">
 @endif
 
 <style>
