@@ -186,6 +186,19 @@ class CyberpunkThemePage extends Page implements HasActions, HasForms
                             ]),
                     ]),
 
+                Section::make('Idioma del visitante')
+                    ->description('Paymenter trae 24 idiomas, pero de fábrica todo el mundo entra en el idioma de la tienda hasta que cambia el selector a mano. Con esto, cada visitante entra directamente en su idioma.')
+                    ->columns(2)
+                    ->schema([
+                        Toggle::make('auto_locale')
+                            ->label('Poner la web en el idioma del visitante')
+                            ->helperText('Se mira el idioma que pide su navegador y se elige el mejor de entre los que tengas activados en Ajustes → General → Idiomas. Si el visitante cambia el idioma a mano, manda su elección.'),
+                        Select::make('default_locale')
+                            ->label('Idioma de respaldo')
+                            ->options(fn () => $this->localeOptions())
+                            ->helperText('El que se usa cuando el idioma del visitante no está entre los que tienes activados.'),
+                    ]),
+
                 Section::make('Textos')
                     ->columns(2)
                     ->schema([
@@ -364,6 +377,36 @@ class CyberpunkThemePage extends Page implements HasActions, HasForms
      *
      * @return array<string, string>
      */
+    /**
+     * Idiomas que el administrador tiene activados en Paymenter.
+     *
+     * Si todavía no ha activado ninguno, se ofrecen todos los que trae
+     * Paymenter para que el respaldo se pueda elegir igualmente.
+     *
+     * @return array<string, string>
+     */
+    protected function localeOptions(): array
+    {
+        $todos = config('app.available_locales', []);
+        $activos = config('settings.allowed_languages', []);
+
+        if (is_array($activos) && count($activos) > 0) {
+            $opciones = [];
+
+            foreach ($activos as $code) {
+                if (is_string($code)) {
+                    $opciones[$code] = $todos[$code] ?? $code;
+                }
+            }
+
+            if (count($opciones) > 0) {
+                return $opciones;
+            }
+        }
+
+        return is_array($todos) ? $todos : ['en' => 'English'];
+    }
+
     protected function animationOptions(): array
     {
         Defaults::loadThemeHelpers();

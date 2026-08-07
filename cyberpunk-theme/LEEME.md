@@ -4,15 +4,15 @@ Paquetes disponibles (elige según lo que admita tu servidor):
 
 | Paquete | Qué instala | Dónde | Tamaño |
 |---|---|---|---|
-| `cyberpunk-extension.zip` | La extensión sola | `extensions/Others/CyberpunkTheme` | 81 KB |
-| `cyberpunk-extension-con-tema.zip` | Extensión + tema (sin estilos) | `extensions/…` + `themes/cyberpunk` | 223 KB |
+| `cyberpunk-extension.zip` | La extensión sola | `extensions/Others/CyberpunkTheme` | 84 KB |
+| `cyberpunk-extension-con-tema.zip` | Extensión + tema (sin estilos) | `extensions/…` + `themes/cyberpunk` | 226 KB |
 | `cyberpunk-assets.zip` | Sólo los estilos compilados | `public/cyberpunk` | 222 KB |
 | `cyberpunk-tema.zip` | El tema completo + estilos | `themes/cyberpunk` + `public/cyberpunk` | 387 KB |
-| `cyberpunk-todo-en-uno.zip` | Todo de una vez | las tres carpetas | 445 KB |
+| `cyberpunk-todo-en-uno.zip` | Todo de una vez | las tres carpetas | 449 KB |
 
 ## Si el subidor del panel rechaza los archivos grandes
 
-Si `cyberpunk-extension.zip` (81 KB) sube pero `cyberpunk-todo-en-uno.zip` (445 KB)
+Si `cyberpunk-extension.zip` (84 KB) sube pero `cyberpunk-todo-en-uno.zip` (449 KB)
 no, tu servidor tiene un límite de subida bajo. Compruébalo:
 
 ```bash
@@ -26,7 +26,7 @@ PHP-FPM y Nginx.
 
 Mientras tanto, la combinación que funciona con límites bajos es:
 
-1. Sube por el panel `cyberpunk-extension-con-tema.zip` (223 KB) → instala la
+1. Sube por el panel `cyberpunk-extension-con-tema.zip` (226 KB) → instala la
    extensión **y** el tema.
 2. Copia por FTP el contenido de `cyberpunk-assets.zip` a `public/cyberpunk/`.
 
@@ -223,6 +223,9 @@ En **General → Barra de navegación**:
     botón de las tres rayas se ve **también en el ordenador**.
 - **El panel se abre por**: la derecha o la izquierda.
 
+Arriba del panel va el **logo con el nombre de la tienda** (pinchando se va al
+inicio) y, justo debajo, el **idioma, la moneda y el modo claro/oscuro**.
+
 El panel lateral lleva dentro, sin tener que dar un segundo clic en el avatar:
 los enlaces del sitio, las opciones de la cuenta (panel, servicios, facturas,
 tickets, cuenta), **el acceso al panel de administración** y cerrar sesión.
@@ -230,6 +233,38 @@ tickets, cuenta), **el acceso al panel de administración** y cerrar sesión.
 El enlace de administración sólo lo ve quien tiene rol de administrador: el
 filtro lo aplica el propio Paymenter (`Navigation::getAccountDropdownLinks()`),
 así que un cliente normal ni siquiera lo tiene en el HTML.
+
+## El idioma del visitante
+
+Paymenter trae **24 idiomas**, pero de fábrica todo el mundo entra en el idioma
+de la tienda hasta que toca el selector a mano — su middleware `SetLocale` sólo
+mira la sesión, nunca al visitante.
+
+En **General → Idioma del visitante**:
+
+- **Poner la web en el idioma del visitante** (activado): se lee el idioma que
+  pide su navegador y se elige el mejor de entre los que tengas activados en
+  *Ajustes → General → Idiomas* de Paymenter.
+- **Idioma de respaldo** (inglés): el que se usa cuando el idioma del visitante
+  no está entre los que tienes activados.
+
+Cómo se decide, con un ejemplo real: un navegador brasileño manda
+`pt-BR,pt;q=0.9,es;q=0.7`. Si tienes activados español e inglés, no hay
+portugués, pero sí español en tercera opción → entra en **español**, no en
+inglés. Un navegador francés sin más opciones entra en el idioma de respaldo.
+
+En cuanto el visitante cambia el idioma con el selector, manda su elección y
+esto ya no vuelve a tocar nada.
+
+**Por qué el navegador y no la IP:** la IP dice el país, no el idioma. Un
+hispanohablante que vive en Alemania acabaría leyendo alemán, y con una VPN el
+país deja de significar nada. El navegador sí sabe qué idioma quiere su dueño.
+
+> **Ojo:** esto cambia al idioma del visitante todo lo que Paymenter ya tiene
+> traducido (menús, botones, carrito, facturas, panel del cliente) y los textos
+> fijos del tema. Lo que **tú** escribes en el panel — el banner, las tarjetas
+> de marketing, los títulos de las secciones, el nombre de la comunidad — se
+> queda tal cual lo escribiste, porque es contenido tuyo, no una traducción.
 
 ### Ajustes que quizá busques
 
@@ -405,7 +440,7 @@ tail -50 storage/logs/laravel.log
 ```
 
 Por eso `cyberpunk-extension.zip` se genera **sólo con código** (sin manuales):
-son 81 KB en vez de 100 KB (además se generan sin entradas de carpeta ni
+son 84 KB en vez de 100 KB (además se generan sin entradas de carpeta ni
 campos extra de Unix), para que quepa también en los servidores con el
 límite muy bajo.
 

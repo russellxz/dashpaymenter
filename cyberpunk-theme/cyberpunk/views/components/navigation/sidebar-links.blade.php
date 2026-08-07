@@ -1,5 +1,15 @@
+{{-- $locale: cuando estos enlaces van dentro del panel lateral del menú, el
+     selector de idioma y moneda ya está arriba del panel, así que aquí se
+     omite para no repetirlo.
+
+     $allLinks: los enlaces del sitio (inicio, tienda, páginas...) sólo se
+     esconden en pantallas grandes cuando la barra de arriba ya los enseña. Si
+     el menú es un panel lateral, la barra no lleva enlaces, así que tienen que
+     salir aquí siempre. --}}
+@props(['locale' => true, 'allLinks' => false])
+
 <div class="lg:px-4 lg:py-6 flex flex-col gap-2">
-    <div class="flex flex-col gap-2 md:hidden">
+    <div class="flex flex-col gap-2 {{ $allLinks ? '' : 'md:hidden' }}">
         @foreach (\App\Classes\Navigation::getLinks() as $nav)
         @if (!empty($nav['children']))
         <div x-data="{ activeAccordion: {{ $nav['active'] ? 'true' : 'false' }} }"
@@ -102,11 +112,13 @@
         <div class="h-px w-full bg-neutral"></div>
         @endisset
         @endforeach
+        @if($locale)
         <div class="flex flex-row items-center mt-4 justify-between md:hidden">
             <livewire:components.locale-switch />
 
             <x-theme-toggle />
 
         </div>
+        @endif
     </div>
 </div>

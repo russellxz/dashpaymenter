@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
 use Livewire\Livewire;
 use Paymenter\Extensions\Others\CyberpunkTheme\Http\Middleware\CountVisit;
+use Paymenter\Extensions\Others\CyberpunkTheme\Http\Middleware\DetectLocale;
 use Paymenter\Extensions\Others\CyberpunkTheme\Livewire\Avatar as AvatarComponent;
 use Paymenter\Extensions\Others\CyberpunkTheme\Livewire\Community as CommunityComponent;
 use Paymenter\Extensions\Others\CyberpunkTheme\Livewire\CommunityPreview as CommunityPreviewComponent;
@@ -21,7 +22,7 @@ use Paymenter\Extensions\Others\CyberpunkTheme\Support\Installer;
 #[ExtensionMeta(
     name: 'Cyberpunk Theme',
     description: 'Tema Cyberpunk totalmente personalizable para Paymenter: banner con marketing rotativo, animaciones de fondo, comunidad de usuarios, reseñas con estrellas de los planes y del servicio, avatares, contadores y paletas de colores.',
-    version: '1.5.2',
+    version: '1.5.3',
     author: 'Sky Ultra Plus',
     url: 'https://skyultraplus.com',
     icon: 'ri-cpu-line',
@@ -133,6 +134,10 @@ class CyberpunkTheme extends Extension
         if (Config::bool('count_visits', true)) {
             ExtensionHelper::registerMiddleware(CountVisit::class);
         }
+
+        // Idioma del visitante según su navegador (el propio middleware
+        // comprueba si el ajuste está activado y respeta la elección manual).
+        ExtensionHelper::registerMiddleware(DetectLocale::class);
 
         // Enlaces en la barra de navegación: páginas personalizadas + comunidad
         Event::listen('navigation', function () {

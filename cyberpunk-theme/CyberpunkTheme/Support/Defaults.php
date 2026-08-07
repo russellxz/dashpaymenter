@@ -62,6 +62,10 @@ class Defaults
             'nav_style' => 'bar',
             'nav_drawer_side' => 'right',
 
+            // Idioma del visitante
+            'auto_locale' => true,
+            'default_locale' => 'en',
+
             // Diseño
             'design' => 'cyberpunk',
             'card_style' => 'clip',

@@ -169,16 +169,36 @@ $enBarra = $navStyle !== 'drawer';
                     class="absolute top-0 bottom-0 {{ $navSide === 'left' ? 'left-0 border-e' : 'right-0 border-s' }}
                         w-full sm:w-[380px] bg-background-secondary border-neutral shadow-2xl flex flex-col">
 
-                    <div class="flex items-center justify-between gap-3 p-4 border-b border-neutral">
-                        <span class="font-black text-lg cyber-neon-text">{{ config('app.name') }}</span>
-                        <button @click="slideOverOpen = false" aria-label="Cerrar menú"
-                            class="p-2 rounded-lg border border-neutral text-base/60 hover:text-error hover:border-error/40 transition cursor-pointer">
-                            <x-ri-close-fill class="size-5" />
-                        </button>
+                    {{-- Cabecera: logo y nombre, y justo debajo el idioma, la moneda
+                         y el modo claro/oscuro. Va aquí arriba y fuera de la zona con
+                         scroll para que el desplegable del idioma se abra hacia abajo
+                         con sitio de sobra y no quede recortado. --}}
+                    <div class="border-b border-neutral shrink-0">
+                        <div class="flex items-center justify-between gap-3 p-4 pb-3">
+                            <a href="{{ route('home') }}" wire:navigate
+                                @click="slideOverOpen = false"
+                                class="flex flex-row items-center gap-2 min-w-0 group">
+                                <x-logo class="h-8 shrink-0 transition group-hover:drop-shadow-[0_0_10px_hsl(var(--color-primary))]" />
+                                @if(theme('logo_display', 'logo-and-name') != 'logo-only')
+                                <span class="font-black text-lg leading-none cyber-neon-text truncate">{{ config('app.name') }}</span>
+                                @endif
+                            </a>
+                            <button @click="slideOverOpen = false" aria-label="Cerrar menú"
+                                class="shrink-0 p-2 rounded-lg border border-neutral text-base/60 hover:text-error hover:border-error/40 transition cursor-pointer">
+                                <x-ri-close-fill class="size-5" />
+                            </button>
+                        </div>
+
+                        <div class="flex flex-row items-center gap-2 px-3 pb-3">
+                            <livewire:components.locale-switch />
+                            <div class="ms-auto shrink-0">
+                                <x-theme-toggle />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="flex-1 min-h-0 overflow-y-auto p-4">
-                        <x-navigation.sidebar-links />
+                        <x-navigation.sidebar-links :locale="false" :allLinks="!$enBarra" />
 
                         @auth
                         <div class="cyber-divider my-5"></div>
@@ -216,11 +236,6 @@ $enBarra = $navStyle !== 'drawer';
                             </a>
                         </div>
                         @endauth
-                    </div>
-
-                    <div class="p-4 border-t border-neutral flex items-center justify-between gap-2">
-                        <livewire:components.locale-switch />
-                        <x-theme-toggle />
                     </div>
                 </div>
             </div>

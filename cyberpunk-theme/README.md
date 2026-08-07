@@ -4,14 +4,31 @@ Dos paquetes separados. **Ninguno modifica el núcleo de Paymenter ni el tema `d
 
 | Archivo | Qué es | Se instala en | Tamaño |
 |---|---|---|---|
-| `cyberpunk-extension.zip` | **La extensión sola** | `extensions/Others/CyberpunkTheme` | 81 KB |
-| `cyberpunk-extension-con-tema.zip` | **Extensión + tema**, sin los estilos compilados | `extensions/…` y `themes/cyberpunk` | 223 KB |
+| `cyberpunk-extension.zip` | **La extensión sola** | `extensions/Others/CyberpunkTheme` | 84 KB |
+| `cyberpunk-extension-con-tema.zip` | **Extensión + tema**, sin los estilos compilados | `extensions/…` y `themes/cyberpunk` | 226 KB |
 | `cyberpunk-assets.zip` | **Sólo los estilos compilados** (CSS y JS) | `public/cyberpunk` | 222 KB |
 | `cyberpunk-tema.zip` | **El tema completo** + estilos + `instalar.sh` | `themes/cyberpunk` y `public/cyberpunk` | 387 KB |
-| `cyberpunk-todo-en-uno.zip` | **Todo**: extensión + tema + estilos | las tres carpetas de una vez | 445 KB |
+| `cyberpunk-todo-en-uno.zip` | **Todo**: extensión + tema + estilos | las tres carpetas de una vez | 449 KB |
 
 El tema funciona por sí solo; la extensión añade el panel de administración y las
 funciones sociales encima.
+
+## Novedades de la 1.5.3
+
+- **El panel lateral estrena cabecera**: el **logo** sale junto al nombre de la
+  tienda (y lleva al inicio), y justo debajo van el **idioma, la moneda y el
+  modo claro/oscuro**. Antes estaban pegados al borde de abajo del panel, lejos
+  de todo. Ahora se abren hacia abajo, con sitio de sobra y sin recortes.
+- **Arreglado**: con el menú en modo panel lateral, en el ordenador no salían
+  los enlaces del sitio (inicio, tienda, páginas) — se escondían a partir de
+  768 px porque los enseñaba la barra de arriba, que en ese modo va vacía.
+- **Cada visitante entra en su idioma.** Paymenter trae 24 idiomas, pero de
+  fábrica sólo cambia de idioma quien toca el selector a mano. Ahora se mira el
+  idioma del navegador del visitante y se elige el mejor de entre los que
+  tengas activados; si no coincide ninguno, entra en inglés (o en el idioma de
+  respaldo que elijas). La elección manual siempre manda sobre la automática, y
+  todo se puede desactivar desde *General → Idioma del visitante*.
+  No se usa la IP a propósito: la IP dice el país, no el idioma.
 
 ## Novedades de la 1.5.2
 
@@ -151,9 +168,9 @@ funciones sociales encima.
 
 - **Por terminal (siempre funciona):** `cyberpunk-tema.zip` + `cyberpunk-extension.zip`.
 - **Todo desde el panel:** `cyberpunk-todo-en-uno.zip` (necesita que el subidor
-  admita 445 KB y que el usuario web pueda escribir en `themes/` y `public/`).
+  admita 449 KB y que el usuario web pueda escribir en `themes/` y `public/`).
 - **Si el subidor rechaza archivos grandes:** sube `cyberpunk-extension-con-tema.zip`
-  (223 KB) por el panel y copia `cyberpunk-assets.zip` a `public/cyberpunk/` por FTP.
+  (226 KB) por el panel y copia `cyberpunk-assets.zip` a `public/cyberpunk/` por FTP.
 
 Los ZIP se generan con `bash build.sh` a partir de las fuentes de esta carpeta.
 

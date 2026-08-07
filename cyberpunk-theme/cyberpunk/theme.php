@@ -873,6 +873,18 @@ return [
             'default' => 'right',
         ],
         [
+            'name' => 'auto_locale',
+            'label' => 'Idioma automático según el visitante',
+            'type' => 'checkbox',
+            'default' => true,
+        ],
+        [
+            'name' => 'default_locale',
+            'label' => 'Idioma de respaldo',
+            'type' => 'text',
+            'default' => 'en',
+        ],
+        [
             'name' => 'design',
             'label' => 'Diseño',
             'type' => 'select',
